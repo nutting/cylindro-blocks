@@ -13,9 +13,9 @@ public class OpenApiConfig {
     public OpenAPI demoOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Spring Boot HelloWorld Demo API")
-                        .version("1.0.0")
-                        .description("一个最小但更像样的 Spring Boot 演示项目")
+                        .title("Spring Boot Enterprise Demo API")
+                        .version("1.1.0")
+                        .description("一个可直接演示的 Spring Boot 企业风格示例项目")
                         .contact(new Contact().name("OpenClaw Assistant")));
     }
 }

@@ -16,13 +16,16 @@ public class HelloController {
 
     @Operation(summary = "根欢迎接口")
     @GetMapping("/")
-    public ApiResponse<Map<String, String>> root() {
-        return ApiResponse.success(Map.of("message", "Hello, Spring Boot!"));
+    public ApiResponse<Map<String, Object>> root() {
+        return ApiResponse.success(Map.of(
+                "message", "Spring Boot enterprise demo is running",
+                "modules", new String[]{"health", "customer", "swagger"}
+        ));
     }
 
     @Operation(summary = "HelloWorld 接口")
     @GetMapping("/hello")
     public ApiResponse<Map<String, String>> hello() {
-        return ApiResponse.success(Map.of("message", "Hello World"));
+        return ApiResponse.success(Map.of("message", "Hello Enterprise World"));
     }
 }
