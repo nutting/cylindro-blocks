@@ -259,10 +259,10 @@ const cylinderFrame = new THREE.Mesh(
   new THREE.CylinderGeometry(RADIUS - 0.12, RADIUS - 0.12, HEIGHT * CELL_H + 0.35, WIDTH, 1, true),
   new THREE.MeshStandardMaterial({
     color: '#122034',
-    metalness: 0.15,
-    roughness: 0.78,
-    transparent: true,
-    opacity: 0.35,
+    emissive: '#08111f',
+    emissiveIntensity: 0.18,
+    metalness: 0.22,
+    roughness: 0.72,
     side: THREE.DoubleSide,
   }),
 );
