@@ -7,13 +7,13 @@ type PieceDef = { name: string; color: Cell; rotations: Offset[][] };
 type Piece = { def: PieceDef; rotation: number; x: number; y: number };
 
 const WIDTH = 20;
-const HEIGHT = 18;
+const HEIGHT = 14;
 const DROP_INTERVAL = 650;
 const SOFT_DROP_INTERVAL = 55;
 const RADIUS = 4.2;
 const CELL_W = (Math.PI * 2 * RADIUS) / WIDTH;
-const CELL_H = 0.72;
-const DEPTH = 0.68;
+const CELL_H = 0.64;
+const DEPTH = 0.56;
 
 const COLORS = {
   0: '#000000',
@@ -285,7 +285,7 @@ const ghostGroup = new THREE.Group();
 const activeGroup = new THREE.Group();
 world.add(boardGroup, ghostGroup, activeGroup);
 
-const cubeGeo = new THREE.BoxGeometry(CELL_W * 0.9, CELL_H * 0.9, DEPTH);
+const cubeGeo = new THREE.BoxGeometry(CELL_W * 0.78, CELL_H * 0.78, DEPTH);
 const materialCache = new Map<string, THREE.MeshStandardMaterial>();
 
 function getMaterial(hex: string, ghost = false) {
