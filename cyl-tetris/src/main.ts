@@ -204,6 +204,7 @@ app.innerHTML = `
           <li>↓：加速下落</li>
           <li>空格：直接落到底</li>
           <li>A / D：旋转圆柱视角</li>
+          <li>鼠标拖拽：旋转圆柱</li>
           <li>R：重新开始</li>
         </ul>
       </div>
@@ -229,6 +230,9 @@ let dropAccumulator = 0;
 let softDropping = false;
 let cameraSpin = 0.75;
 let gameOver = false;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartSpin = 0;
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -531,6 +535,56 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('keyup', (event) => {
   if (event.key === 'ArrowDown') softDropping = false;
 });
+
+canvas.addEventListener('pointerdown', (event) => {
+  isDragging = true;
+  dragStartX = event.clientX;
+  dragStartSpin = cameraSpin;
+  canvas.setPointerCapture(event.pointerId);
+  canvas.style.cursor = 'grabbing';
+});
+
+canvas.addEventListener('pointermove', (event) => {
+  if (!isDragging) return;
+  const deltaX = event.clientX - dragStartX;
+  cameraSpin = dragStartSpin + deltaX * 0.012;
+});
+
+function stopDragging(pointerId?: number) {
+  isDragging = false;
+  if (pointerId !== undefined && canvas.hasPointerCapture(pointerId)) {
+    canvas.releasePointerCapture(pointerId);
+  }
+  canvas.style.cursor = 'grab';
+}
+
+canvas.addEventListener('pointerup', (event) => {
+  stopDragging(event.pointerId);
+});
+
+canvas.addEventListener('pointercancel', (event) => {
+  stopDragging(event.pointerId);
+});
+
+canvas.addEventListener('pointerleave', () => {
+  if (!isDragging) canvas.style.cursor = 'grab';
+});
+
+canvas.addEventListener('wheel', (event) => {
+  if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) {
+    cameraSpin += (event.deltaX + event.deltaY) * 0.003;
+    event.preventDefault();
+  }
+}, { passive: false });
+
+canvas.style.cursor = 'grab';
+
+autoFocusCanvas();
+
+function autoFocusCanvas() {
+  canvas.tabIndex = 0;
+  canvas.addEventListener('pointerdown', () => canvas.focus());
+}
 
 let previous = performance.now();
 function frame(now: number) {
