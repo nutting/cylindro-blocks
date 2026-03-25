@@ -13,7 +13,7 @@ const SOFT_DROP_INTERVAL = 55;
 const RADIUS = 4.2;
 const CELL_W = (Math.PI * 2 * RADIUS) / WIDTH;
 const CELL_H = 0.64;
-const DEPTH = 0.56;
+const DEPTH = 0.38;
 
 const COLORS = {
   0: '#000000',
@@ -285,7 +285,7 @@ const ghostGroup = new THREE.Group();
 const activeGroup = new THREE.Group();
 world.add(boardGroup, ghostGroup, activeGroup);
 
-const cubeGeo = new THREE.BoxGeometry(CELL_W * 0.78, CELL_H * 0.78, DEPTH);
+const cubeGeo = new THREE.BoxGeometry(CELL_W * 0.92, CELL_H * 0.92, DEPTH);
 const materialCache = new Map<string, THREE.MeshStandardMaterial>();
 
 function getMaterial(hex: string, ghost = false) {
@@ -293,12 +293,12 @@ function getMaterial(hex: string, ghost = false) {
   if (materialCache.has(key)) return materialCache.get(key)!;
   const material = new THREE.MeshStandardMaterial({
     color: hex,
-    emissive: ghost ? hex : '#111111',
-    emissiveIntensity: ghost ? 0.15 : 0.28,
+    emissive: ghost ? hex : hex,
+    emissiveIntensity: ghost ? 0.08 : 0.12,
     transparent: ghost,
-    opacity: ghost ? 0.24 : 1,
-    metalness: 0.18,
-    roughness: 0.42,
+    opacity: ghost ? 0.18 : 1,
+    metalness: 0.08,
+    roughness: 0.7,
   });
   materialCache.set(key, material);
   return material;
@@ -431,7 +431,8 @@ function clearGroup(group: THREE.Group) {
 function placeCellMesh(group: THREE.Group, x: number, y: number, color: string, ghost = false) {
   const angle = (x / WIDTH) * Math.PI * 2 + Math.PI / WIDTH;
   const mesh = new THREE.Mesh(cubeGeo, getMaterial(color, ghost));
-  mesh.position.set(Math.cos(angle) * RADIUS, topY(y), Math.sin(angle) * RADIUS);
+  const surfaceRadius = ghost ? RADIUS - 0.02 : RADIUS - 0.04;
+  mesh.position.set(Math.cos(angle) * surfaceRadius, topY(y), Math.sin(angle) * surfaceRadius);
   mesh.rotation.y = -angle + Math.PI / 2;
   group.add(mesh);
 }
@@ -491,7 +492,7 @@ function resize() {
 
   const fitScale = Math.min(1, Math.max(0.68, height / 980));
   world.scale.setScalar(fitScale);
-  world.position.y = aspect < 0.9 ? 1.2 : 1.0;
+  world.position.y = aspect < 0.9 ? 1.6 : 1.35;
 
   renderer.setSize(width, height, false);
 }
