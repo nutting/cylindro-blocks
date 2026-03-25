@@ -526,10 +526,10 @@ window.addEventListener('keydown', (event) => {
     hardDrop();
   } else if (event.key === 'ArrowLeft') {
     event.preventDefault();
-    cameraSpin -= Math.PI / 12;
+    cameraSpin += Math.PI / 12;
   } else if (event.key === 'ArrowRight') {
     event.preventDefault();
-    cameraSpin += Math.PI / 12;
+    cameraSpin -= Math.PI / 12;
   } else if (event.key === 'r' || event.key === 'R') {
     resetGame();
   }
