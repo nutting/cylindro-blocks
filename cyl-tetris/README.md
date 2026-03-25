@@ -9,16 +9,20 @@
 - 围满圆柱一整圈即可消除
 - 支持键盘与鼠标交互
 
-## 在线与本地
+## 在线试玩
 
-### 本地开发
+部署 GitHub Pages 后，试玩地址将会是：
+
+- <https://nutting.github.io/cylindro-blocks/>
+
+## 本地开发
 
 ```bash
 npm install
 npm run dev
 ```
 
-### 本地预览生产构建
+## 本地预览生产构建
 
 ```bash
 npm run build
