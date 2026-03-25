@@ -224,6 +224,7 @@ const canvas = document.querySelector<HTMLCanvasElement>('#stage')!;
 
 const board: Cell[][] = [];
 let activePiece: Piece | null = null;
+let lastSpawnX = Math.floor(WIDTH / 2);
 let score = 0;
 let clearedRings = 0;
 let dropAccumulator = 0;
@@ -346,7 +347,7 @@ function randomPiece(): Piece {
   return {
     def,
     rotation: 0,
-    x: Math.floor(WIDTH / 2),
+    x: lastSpawnX,
     y: -1,
   };
 }
@@ -363,6 +364,7 @@ function spawnPiece() {
 
 function lockPiece() {
   if (!activePiece) return;
+  lastSpawnX = activePiece.x;
   for (const { x, y } of getCells(activePiece)) {
     if (y >= 0 && y < HEIGHT) board[y][x] = activePiece.def.color;
   }
@@ -475,6 +477,7 @@ function updateHud() {
 function resetGame() {
   score = 0;
   clearedRings = 0;
+  lastSpawnX = Math.floor(WIDTH / 2);
   dropAccumulator = 0;
   softDropping = false;
   gameOver = false;
