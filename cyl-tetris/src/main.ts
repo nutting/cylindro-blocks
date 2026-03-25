@@ -199,11 +199,11 @@ app.innerHTML = `
       <div class="controls">
         <h2>操作</h2>
         <ul>
-          <li>← / →：沿圆柱左右移动</li>
-          <li>↑：旋转方块</li>
-          <li>↓：加速下落</li>
+          <li>A / D：方块左右移动</li>
+          <li>W：旋转方块</li>
+          <li>S：加速下落</li>
           <li>空格：直接落到底</li>
-          <li>A / D：旋转圆柱视角</li>
+          <li>← / →：旋转圆柱视角</li>
           <li>鼠标拖拽：旋转圆柱</li>
           <li>R：重新开始</li>
         </ul>
@@ -507,26 +507,28 @@ function resize() {
 window.addEventListener('resize', resize);
 
 window.addEventListener('keydown', (event) => {
-  if (event.repeat && !['ArrowDown', 'a', 'd', 'A', 'D'].includes(event.key)) return;
+  if (event.repeat && !['s', 'S', 'ArrowLeft', 'ArrowRight'].includes(event.key)) return;
 
-  if (event.key === 'ArrowLeft') {
+  if (event.key === 'a' || event.key === 'A') {
     event.preventDefault();
     tryMove(1, 0);
-  } else if (event.key === 'ArrowRight') {
+  } else if (event.key === 'd' || event.key === 'D') {
     event.preventDefault();
     tryMove(-1, 0);
-  } else if (event.key === 'ArrowUp') {
+  } else if (event.key === 'w' || event.key === 'W') {
     event.preventDefault();
     tryRotate();
-  } else if (event.key === 'ArrowDown') {
+  } else if (event.key === 's' || event.key === 'S') {
     event.preventDefault();
     softDropping = true;
   } else if (event.key === ' ') {
     event.preventDefault();
     hardDrop();
-  } else if (event.key === 'a' || event.key === 'A') {
+  } else if (event.key === 'ArrowLeft') {
+    event.preventDefault();
     cameraSpin -= Math.PI / 12;
-  } else if (event.key === 'd' || event.key === 'D') {
+  } else if (event.key === 'ArrowRight') {
+    event.preventDefault();
     cameraSpin += Math.PI / 12;
   } else if (event.key === 'r' || event.key === 'R') {
     resetGame();
@@ -536,7 +538,7 @@ window.addEventListener('keydown', (event) => {
 });
 
 window.addEventListener('keyup', (event) => {
-  if (event.key === 'ArrowDown') softDropping = false;
+  if (event.key === 's' || event.key === 'S') softDropping = false;
 });
 
 canvas.addEventListener('pointerdown', (event) => {
