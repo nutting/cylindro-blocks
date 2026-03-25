@@ -263,11 +263,11 @@ scene.add(rim);
 const cylinderFrame = new THREE.Mesh(
   new THREE.CylinderGeometry(RADIUS - 0.12, RADIUS - 0.12, HEIGHT * CELL_H + 0.35, WIDTH, 1, true),
   new THREE.MeshStandardMaterial({
-    color: '#122034',
-    emissive: '#08111f',
-    emissiveIntensity: 0.18,
-    metalness: 0.22,
-    roughness: 0.72,
+    color: '#b7c7db',
+    emissive: '#31465f',
+    emissiveIntensity: 0.1,
+    metalness: 0.16,
+    roughness: 0.82,
     side: THREE.DoubleSide,
   }),
 );
