@@ -239,7 +239,7 @@ scene.background = new THREE.Color('#09111f');
 scene.fog = new THREE.Fog('#09111f', 10, 24);
 
 const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-camera.position.set(0, 1.6, 17);
+camera.position.set(0, 2.2, 17);
 
 const world = new THREE.Group();
 scene.add(world);
@@ -486,11 +486,12 @@ function resize() {
   const aspect = width / height;
 
   camera.aspect = aspect;
-  camera.position.set(0, aspect < 0.9 ? 1.2 : 1.6, aspect < 0.9 ? 19 : 17);
+  camera.position.set(0, aspect < 0.9 ? 2.0 : 2.2, aspect < 0.9 ? 19 : 17);
   camera.updateProjectionMatrix();
 
   const fitScale = Math.min(1, Math.max(0.68, height / 980));
   world.scale.setScalar(fitScale);
+  world.position.y = aspect < 0.9 ? 1.2 : 1.0;
 
   renderer.setSize(width, height, false);
 }
