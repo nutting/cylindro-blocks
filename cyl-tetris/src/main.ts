@@ -504,10 +504,10 @@ window.addEventListener('keydown', (event) => {
 
   if (event.key === 'ArrowLeft') {
     event.preventDefault();
-    tryMove(-1, 0);
+    tryMove(1, 0);
   } else if (event.key === 'ArrowRight') {
     event.preventDefault();
-    tryMove(1, 0);
+    tryMove(-1, 0);
   } else if (event.key === 'ArrowUp') {
     event.preventDefault();
     tryRotate();
