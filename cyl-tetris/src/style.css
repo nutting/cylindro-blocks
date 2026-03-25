@@ -1,0 +1,141 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #ebf2ff;
+  background: radial-gradient(circle at top, #122445 0%, #08111e 58%, #04070d 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px;
+}
+
+.panel {
+  border: 1px solid rgba(175, 210, 255, 0.12);
+  background: linear-gradient(180deg, rgba(11, 22, 41, 0.92), rgba(8, 15, 28, 0.88));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+}
+
+.hud {
+  padding: 28px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 0;
+  color: #9eb3d1;
+  line-height: 1.55;
+}
+
+.stats {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stats div {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(118, 164, 224, 0.08);
+  border: 1px solid rgba(118, 164, 224, 0.14);
+}
+
+.stats span {
+  display: block;
+  font-size: 0.82rem;
+  color: #8aa0c4;
+  margin-bottom: 8px;
+}
+
+.stats strong {
+  display: block;
+  font-size: 1.35rem;
+}
+
+.controls {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(18, 37, 67, 0.42);
+}
+
+.controls h2 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.controls ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #b8c8df;
+  line-height: 1.7;
+}
+
+.status {
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  color: #d7e5ff;
+  background: rgba(77, 141, 255, 0.12);
+  border: 1px solid rgba(77, 141, 255, 0.2);
+}
+
+.stage-wrap {
+  min-height: calc(100vh - 36px);
+  padding: 12px;
+}
+
+#stage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-wrap {
+    min-height: 62vh;
+  }
+}
